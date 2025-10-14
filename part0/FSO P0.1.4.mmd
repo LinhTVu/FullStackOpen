@@ -1,0 +1,40 @@
+sequenceDiagram
+    participant browser
+    participant server (studies.cs.helsinki.fi)
+ 
+    browser->>server: POST /exampleapp/new_note
+    activate server
+    server-->>browser: 302 Redirect to /exampleapp/notes
+    deactivate server
+
+    browser->>server: GET /exampleapp/notes
+    activate server
+    server-->> browser: 200 ok
+    deactivate server
+
+    browser->>server: GET /exampleapp/main.css
+    activate server
+    server-->> browser: style sheet
+    deactivate server
+
+    browser->>server: GET /exampleapp/main.js
+    activate server
+    server-->> browser: JavaScript code
+    deactivate server
+
+    browser->>server: GET /exampleapp/main.css
+    activate server
+    server-->> browser: style sheet
+    deactivate server
+
+    browser->>server: GET /exampleapp/main.js
+    activate server
+    server-->> browser: JavaScript code
+    deactivate server
+
+    browser->>server: GET /exampleapp/data.json
+    activate server
+    server-->> browser: raw data of all notes
+    deactivate server
+
+
