@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 
 function getRandomInteger(min, max) {
@@ -17,23 +18,47 @@ const App = () => {
     'The only way to go fast, is to go well.'
   ]
    
-  const [selected, setSelected] = useState(0)
+ const [selected, setSelected] = useState(0)
 // declare a state var named selected which will be changed by setSelected function
 
-const handleClick = () => {
+const handleNext = () => {
   const random = getRandomInteger(0, 7)
   setSelected(random)
   console.log(random)
 }
-// define function to handle click event, which generate a random integer between 0 and 7
+// define function to handle click-next event, which generates a random integer between 0 and 7
 // this integer is then passed to setSelected function to update the state variable selected
 
-  return (
+const [vote, setVote] = useState(Array(anecdotes.length).fill(0))
+// create an array to hold the votes for each anecdote
+
+const handleVote = () => {
+  setVote(prev => {
+    const next = [...prev]
+    next[selected] +=1
+  return next
+  }
+)
+}
+// console.log(next)
+// define function to handle click-vote event, which adds 1 to the vote count of current anecdote
+  
+const maxVote = Math.max (...vote)
+const indexOfMax = vote.indexOf(maxVote)
+
+return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
-      <button onClick={handleClick}>next anecdote</button> 
+      <p>has {vote[selected]} votes</p>    
+      <button onClick={handleVote}>vote</button> 
+      <button onClick={handleNext}>next anecdote</button>
+      <h1>Anecdote with most vote</h1>
+      <p>{anecdotes[indexOfMax]}</p>
     </div>
   )
 }
 
 export default App
+
+
