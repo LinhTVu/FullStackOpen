@@ -1,4 +1,17 @@
-//const Course 
+const Course = (props) => {
+  return (
+      <div>
+        <h1>{props.course.name}</h1>
+        <ul>
+          {props.course.parts.map(x => <li key = {x.id}> {x.name} {x.exercises} </li>)}
+        </ul>
+        <b>total of {' '}   
+          {props.course.parts.reduce(function(sum, noex){
+          return sum + noex.exercises},0)
+          } exercises</b>
+      </div>  
+    )
+}
 
 
 const App = () => {
